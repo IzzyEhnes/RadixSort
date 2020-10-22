@@ -196,7 +196,7 @@ class RadixSort
 
         for (int i = 0; i < inArray.length; i++)
         {
-            int LSD = getLeastSignificantDigit(inArray[i]);
+            int LSD = getDigit(inArray[i], 0);
 
             putInQueue(inArray[i], LSD);
         }
@@ -283,16 +283,14 @@ class RadixSort
 
 
 
-    public int getLeastSignificantDigit(int inInt)
+    public int getDigit(int inInt, int targetDigit)
     {
-        while (inInt > 10)
-        {
-            inInt %= 10;
-        }
+        StringBuilder sb = new StringBuilder(String.valueOf(inInt));
+        sb.reverse();
 
-        int LSD = inInt;
+        char temp = sb.toString().charAt(targetDigit - 1);
 
-        return LSD;
+        return Integer.parseInt(String.valueOf(temp));
     }
 
 }
@@ -311,6 +309,11 @@ class Driver
 
         RadixSort r = new RadixSort();
 
-        r.radixSort(array);
+        //r.radixSort(array);
+
+        System.out.println(r.getDigit(123, 1));
+        System.out.println(r.getDigit(456, 2));
+        System.out.println(r.getDigit(789, 3));
+
     }
 }
