@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 class Node<T>
 {
     private T value;
@@ -206,14 +204,10 @@ class RadixSort
             }
 
             inArray = dequeueIntoArray();
-
-            System.out.println("PASS # " + i);
-            for (int k = 0; k < ARRAY_SIZE; k++)
-            {
-                System.out.println(inArray[k]);
-            }
-            System.out.println();
         }
+
+        printAscending(inArray);
+        printDescending(inArray);
     }
 
 
@@ -333,6 +327,33 @@ class RadixSort
         return numDigits;
     }
 
+
+
+    public void printAscending(int[] inArray)
+    {
+        System.out.println("Array in ascending order: ");
+
+        for (int i = 0; i < inArray.length; i++)
+        {
+            System.out.println(inArray[i]);
+        }
+
+        System.out.println();
+    }
+
+
+
+    public void printDescending(int[] inArray)
+    {
+        System.out.println("Array in descending order: ");
+
+        for (int i = inArray.length - 1; i >= 0; i--)
+        {
+            System.out.println(inArray[i]);
+        }
+
+        System.out.println();
+    }
 }
 
 
