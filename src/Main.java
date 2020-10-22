@@ -293,6 +293,30 @@ class RadixSort
         return Integer.parseInt(String.valueOf(temp));
     }
 
+
+    public int getLargestNumDigits(int[] inArray)
+    {
+        int numDigits = 0;
+
+        int max = inArray[0];
+
+        for (int i = 1; i < inArray.length; i++)
+        {
+            if (inArray[i] > max)
+            {
+                max = inArray[i];
+            }
+        }
+
+        while (max > 0)
+        {
+            max /= 10;
+            numDigits++;
+        }
+
+        return numDigits;
+    }
+
 }
 
 
@@ -311,9 +335,6 @@ class Driver
 
         //r.radixSort(array);
 
-        System.out.println(r.getDigit(123, 1));
-        System.out.println(r.getDigit(456, 2));
-        System.out.println(r.getDigit(789, 3));
-
+        System.out.println(r.getLargestNumDigits(array));
     }
 }
