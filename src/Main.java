@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 class Node<T>
 {
     private T value;
@@ -53,6 +55,8 @@ class Node<T>
 class Queue<T>
 {
     private Node<T> head;
+
+
 
     public Queue()
     {
@@ -137,6 +141,22 @@ class Queue<T>
             System.out.print(current.getValue());
         }
     }
+
+
+
+    int size()
+    {
+        int size = 0;
+
+        Node current = new Node();
+
+        for (current = head; current != null; current = current.getNext())
+        {
+            size++;
+        }
+
+        return size;
+    }
 }
 
 
@@ -148,6 +168,9 @@ class RadixSort
 {
 
     private Queue<Integer>[] qArray;
+    private int ARRAY_SIZE;
+
+
 
     public RadixSort()
     {
@@ -169,7 +192,93 @@ class RadixSort
 
     public void radixSort(int[] inArray)
     {
+        ARRAY_SIZE = inArray.length;
 
+        for (int i = 0; i < inArray.length; i++)
+        {
+            int LSD = getLeastSignificantDigit(inArray[i]);
+
+            putInQueue(inArray[i], LSD);
+        }
+
+        int[] test = dequeueIntoArray();
+
+        for (int i = 0; i < ARRAY_SIZE; i++)
+        {
+            System.out.println(test[i]);
+        }
+    }
+
+
+
+    public void putInQueue(int inNum, int LSD)
+    {
+        switch (LSD)
+        {
+            case 0:
+                qArray[0].enqueue(inNum);
+                break;
+
+            case 1:
+                qArray[1].enqueue(inNum);
+                break;
+
+            case 2:
+                qArray[2].enqueue(inNum);
+                break;
+
+            case 3:
+                qArray[3].enqueue(inNum);
+                break;
+
+            case 4:
+                qArray[4].enqueue(inNum);
+                break;
+
+            case 5:
+                qArray[5].enqueue(inNum);
+                break;
+
+            case 6:
+                qArray[6].enqueue(inNum);
+                break;
+
+            case 7:
+                qArray[7].enqueue(inNum);
+                break;
+
+            case 8:
+                qArray[8].enqueue(inNum);
+                break;
+
+            case 9:
+                qArray[9].enqueue(inNum);
+                break;
+        }
+    }
+
+
+
+    public int[] dequeueIntoArray()
+    {
+        int[] numArray = new int[ARRAY_SIZE];
+
+        int indexCount = 0;
+
+        for (int i = 0; i < 10; i++)
+        {
+            int queueSize = qArray[i].size();
+
+            for (int j = 0; j < queueSize; j++)
+            {
+                int temp = qArray[i].peek();
+                qArray[i].dequeue();
+                numArray[indexCount] = temp;
+                indexCount++;
+            }
+        }
+
+        return numArray;
     }
 
 
@@ -182,8 +291,6 @@ class RadixSort
         }
 
         int LSD = inInt;
-
-        System.out.println(LSD);
 
         return LSD;
     }
@@ -204,6 +311,6 @@ class Driver
 
         RadixSort r = new RadixSort();
 
-        r.getLeastSignificantDigit(123);
+        r.radixSort(array);
     }
 }
