@@ -194,18 +194,25 @@ class RadixSort
     {
         ARRAY_SIZE = inArray.length;
 
-        for (int i = 0; i < inArray.length; i++)
+        int numPasses = getLargestNumDigits(inArray);
+
+        for (int i = 1; i <= numPasses; i++)
         {
-            int LSD = getDigit(inArray[i], 0);
+            for (int j = 0; j < inArray.length; j++)
+            {
+                int LSD = getDigit(inArray[j], i);
 
-            putInQueue(inArray[i], LSD);
-        }
+                putInQueue(inArray[j], LSD);
+            }
 
-        int[] test = dequeueIntoArray();
+            inArray = dequeueIntoArray();
 
-        for (int i = 0; i < ARRAY_SIZE; i++)
-        {
-            System.out.println(test[i]);
+            System.out.println("PASS # " + i);
+            for (int k = 0; k < ARRAY_SIZE; k++)
+            {
+                System.out.println(inArray[k]);
+            }
+            System.out.println();
         }
     }
 
@@ -288,10 +295,19 @@ class RadixSort
         StringBuilder sb = new StringBuilder(String.valueOf(inInt));
         sb.reverse();
 
-        char temp = sb.toString().charAt(targetDigit - 1);
+        if (sb.toString().length() < targetDigit)
+        {
+            return 0;
+        }
 
-        return Integer.parseInt(String.valueOf(temp));
+        else
+        {
+            char temp = sb.toString().charAt(targetDigit - 1);
+
+            return Integer.parseInt(String.valueOf(temp));
+        }
     }
+
 
 
     public int getLargestNumDigits(int[] inArray)
@@ -333,8 +349,6 @@ class Driver
 
         RadixSort r = new RadixSort();
 
-        //r.radixSort(array);
-
-        System.out.println(r.getLargestNumDigits(array));
+        r.radixSort(array);
     }
 }
